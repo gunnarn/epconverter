@@ -16,8 +16,7 @@ import glob
 
 def epconverter(src, dest):
 
-    # Create some dummy variables
-
+    # Initiate some variables
     raw = []
     data = []
     max_level = 0
@@ -73,7 +72,27 @@ def epconverter(src, dest):
             a.writerow(trial)
 
 
-for file in glob.glob('*.txt'):
+if len(sys.argv) > 1:
+	arg = sys.argv[1]
+
+else:
+	sys.exit('No arguments supplied.')
+
+
+if os.path.isfile(arg):
+
+	files = [arg]
+
+elif os.path.isdir(arg):
+
+	files = glob.glob(''.join([files, '*.txt']))
+
+else:
+
+	sys.exit('Please select a file or a directory.')
+
+for file in files:
+
 	name, ext = os.path.splitext(file)
 	print(name)
 	epconverter(file, name + '.csv')
