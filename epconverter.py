@@ -5,6 +5,9 @@
 Takes all E-Prime raw data files in the script directory and
 converts them to csv files.
 
+Pro tip: The script can be used for batch processing on Linux using the following command:
+    find ROOT_SEARCH_DIRECTORY -iname "*.txt" -printf "%f\n" -exec python LOCATION_OF_SCRIPT {} \;
+
 Author: Gunnar Norrman (gunnar.norrman@biling.su.se)
 """
 
