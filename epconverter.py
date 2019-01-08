@@ -95,14 +95,22 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         arg = sys.argv[1]
     else:
-        sys.exit('No arguments supplied.')
+        arg = False
 
-    if os.path.isfile(arg):
-        files = [arg]
-    elif os.path.isdir(arg):
-        files = glob.glob(''.join([files, '*.txt']))
+    if arg:
+        if os.path.isfile(arg):
+            files = [arg]
+            print('Loading an E-Prime file')
+        elif os.path.isdir(arg):
+            files = glob.glob(os.path.join(arg, '*.txt'))
+            print('Loading E-Prime files from directory')
+        else:
+            sys.exit('Arguments must be a file or a directory')
     else:
-        sys.exit('Please select a file or a directory.')
+        files = glob.glob('*.txt')
+        print('Loading all E-Prime files from the current directory')
 
     for file in files:
+        path, filename = os.path.split(file)
+        print('Processing file: {}'.format(filename))
         epconverter(file)
